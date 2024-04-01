@@ -1,0 +1,29 @@
+<% const items = [
+    {id: 1, name: 'じゃがいも'},
+    {id: 2, name: 'にんじん'},
+    {id: 3, name: 'たまねぎ'},
+
+];%>
+
+<ul>
+    <% items.forEach((item) => { %>
+        <li>
+            <span><%= item.id %></span>
+            <span><%= item.name %></span>
+        </li>
+ <%});%>
+</ul>
+
+
+<li>
+    <span class="id-column">
+      <!-- itemのidプロパティの値を表示してください -->
+      
+      
+    </span>
+    <span class="name-column">
+      <!-- itemのnameプロパティの値を表示してください -->
+      
+      
+    </span>
+  </li>
