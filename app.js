@@ -4,6 +4,29 @@ const express = require('express');
 // app定数にexpress()関数を呼び出してExpressアプリケーションを代入
 const app = express();
 
+
+
+/* 簡潔に言えば、以下のコードはMySQLデータベースからitemsテーブルのデータを取得し、それをコンソールに表示し、その後にindex.ejsテンプレートをレンダリングしてクライアントに返すという流れです。 */
+
+const mysql = require('mysql');
+
+// 定数connectionを定義して接続情報の書かれたコードを代入してください
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'progate',
+    password: 'password',
+    database: 'list_app'
+});
+
+connection.query('SELECT*FROM items', (error, results) => {
+        // 一覧表示の画面
+        console.log(results);
+        res.render('index.ejs', {items: results});
+    }
+);
+
+
 // appは、Expressアプリケーションのインスタンスを参照する変数です。※先ほど代入
 //'get()'はExpressアプリケーションでGETリクエストを処理するメソッド、
 // GETリクエストとは、ユーザーが特定のウェブページやリソースを取得するためにブラウザから送信されるリクエスト
@@ -27,5 +50,19 @@ app.get('/top', (req, res) => {
 app.get('/index', (req, res) => {
     res.render('index.ejs');
 });
+
+app.get('/new', (req, res) => {
+    res.render('new.ejs');
+});
+
+app.post('/create', (req, res) => {
+    res.render('create.ejs');
+});
+
+connection.query('SELECT*FROM items', (error, results) => {
+    console.log(results);
+    res.render('index.ejs', {items: results});
+});
+
 
 app.listen(3000);
